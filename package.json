@@ -1,0 +1,36 @@
+{
+  "name": "lab3-js-oop-dice-docs-and-design",
+  "version": "0.1.0",
+  "description": "305 lab 3 demo",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Tests will be added in Step 2\"",
+    "lint": "echo \"Linting will be configured in Step 3\"",
+    "format": "echo \"Formatting will be configured in Step 3\"",
+    "docs": "echo \"Documentation generation will be configured in Step 3\""
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jennerdulce/lab3-js-oop-dice-docs-and-design.git"
+  },
+  "keywords": [
+    "dice",
+    "simulation",
+    "oop",
+    "javascript",
+    "testing",
+    "documentation"
+],
+  "author": "Jenner D. Dulce",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jennerdulce/lab3-js-oop-dice-docs-and-design/issues"
+  },
+  "homepage": "https://github.com/jennerdulce/lab3-js-oop-dice-docs-and-design#readme",
+  "devDependencies": {
+    "eslint": "^9.35.0",
+    "jsdoc": "^4.0.4",
+    "prettier": "^3.6.2"
+  }
+}
