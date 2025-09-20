@@ -80,4 +80,17 @@ describe('Die', () => {
       assert.strictEqual(die.hasBeenRolled(), true);
     });
   });
+
+  describe('reset', () => {
+  it('should reset die to unrolled state', () => {
+    const die = new Die();
+    die.roll();
+    assert.strictEqual(die.hasBeenRolled(), true);
+    assert(die.getValue() !== null);
+    
+    die.reset();
+    assert.strictEqual(die.hasBeenRolled(), false);
+    assert.strictEqual(die.getValue(), null);
+    });
+  });
 })
