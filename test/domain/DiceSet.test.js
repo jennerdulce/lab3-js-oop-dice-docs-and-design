@@ -19,28 +19,28 @@ describe('DiceSet', () => {
       assert.throws(() => new DiceSet(-1), /DiceSet must contain at least 1 die/);
     });
   });
-});
 
-describe('rollAll', () => {
-  it('should return array of rolled values', () => {
-      const set = new DiceSet(3, 6);
+  describe('rollAll', () => {
+    it('should return array of rolled values', () => {
+        const set = new DiceSet(3, 6);
+        const results = set.rollAll();
+        assert.strictEqual(results.length, 3);
+        results.forEach(value => {
+          assert(value >= 1, 'Value should be at least 1');
+          assert(value <= 6, 'Value should be at most 6');
+          assert(Number.isInteger(value), 'Value should be an integer');
+      });
+    });
+
+    it('should update all die values', () => {
+      const set = new DiceSet(2, 6);
+      assert.deepStrictEqual(set.getValues(), [null, null]);
       const results = set.rollAll();
-      assert.strictEqual(results.length, 3);
-      results.forEach(value => {
-        assert(value >= 1, 'Value should be at least 1');
-        assert(value <= 6, 'Value should be at most 6');
-        assert(Number.isInteger(value), 'Value should be an integer');
+      assert.deepStrictEqual(set.getValues(), results);
     });
   });
 
-  it('should update all die values', () => {
-    const set = new DiceSet(2, 6);
-    assert.deepStrictEqual(set.getValues(), [null, null]);
-    const results = set.rollAll();
-    assert.deepStrictEqual(set.getValues(), results);
-  });
-
-describe('getValues', () => {
+  describe('getValues', () => {
   it('should return null values before rolling', () => {
     const set = new DiceSet(3);
     assert.deepStrictEqual(set.getValues(), [null, null, null]);
@@ -53,7 +53,7 @@ describe('getValues', () => {
     });
   });
 
-describe('getTotal', () => {
+  describe('getTotal', () => {
   it('should return null if any die not rolled', () => {
     const set = new DiceSet(3);
     assert.strictEqual(set.getTotal(), null);
@@ -75,4 +75,18 @@ describe('getTotal', () => {
     }});
   });
 
-});
+  describe('hasBeenRolled', () => {
+    it('should return false before rolling', () => {
+      const set = new DiceSet(3);
+      assert.strictEqual(set.hasBeenRolled(), false);
+    });
+
+    it('should return true after rolling all dice', () => {
+      const set = new DiceSet(3);
+      set.rollAll();
+      assert.strictEqual(set.hasBeenRolled(), true);
+    });
+  });
+
+
+})
