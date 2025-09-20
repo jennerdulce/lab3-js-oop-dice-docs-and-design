@@ -127,7 +127,7 @@ describe('DiceNotation', () => {
 
     it('should combine multiple dice sets', () => {
       const parsed = DiceNotation.parse('1d4+1d6');
-      
+
       for (let i = 0; i < 20; i++) {
         const result = parsed.roll();
         assert(result.total >= 2, 'Total should be at least 2');
@@ -137,4 +137,29 @@ describe('DiceNotation', () => {
     });
   });
 
+  describe('getMin and getMax', () => {
+    it('should calculate correct min and max for simple notation', () => {
+      const parsed = DiceNotation.parse('3d6');
+      assert.strictEqual(parsed.getMin(), 3);
+      assert.strictEqual(parsed.getMax(), 18);
+    });
+
+    it('should calculate correct min and max with positive modifier', () => {
+      const parsed = DiceNotation.parse('2d8+5');
+      assert.strictEqual(parsed.getMin(), 7); // 2×1 + 5
+      assert.strictEqual(parsed.getMax(), 21); // 2×8 + 5
+    });
+
+    it('should calculate correct min and max with negative modifier', () => {
+      const parsed = DiceNotation.parse('1d20-3');
+      assert.strictEqual(parsed.getMin(), -2); // 1 - 3
+      assert.strictEqual(parsed.getMax(), 17); // 20 - 3
+    });
+
+    it('should calculate correct min and max for complex notation', () => {
+      const parsed = DiceNotation.parse('2d6+1d8+3');
+      assert.strictEqual(parsed.getMin(), 6); // 2 + 1 + 3
+      assert.strictEqual(parsed.getMax(), 23); // 12 + 8 + 3
+    });
+  });
 });
