@@ -67,4 +67,17 @@ describe('Die', () => {
       assert.strictEqual(die.getValue, value2);
     })
   })
+
+  describe('hasBeenRolled', () => {
+    it('should return false before rolling', () => {
+      const die = new Die();
+      assert.strictEqual(die.hasBeenRolled(), false);
+    });
+
+    it('should return true after rolling', () => {
+      const die = new Die();
+      die.roll();
+      assert.strictEqual(die.hasBeenRolled(), true);
+    });
+  });
 })
