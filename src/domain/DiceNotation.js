@@ -23,7 +23,7 @@ export class DiceNotation {
       getMax: () => this.#calculateMax(components)
     };
   }
-  
+
   /**
   * Parses notation into components (dice sets and modifiers)
   * @private
@@ -35,30 +35,37 @@ export class DiceNotation {
     let match;
     let hasValidComponent = false;
     let lastIndex = 0;
+
     while ((match = pattern.exec(notation)) !== null) {
       // Check if there's unmatched text before this match
       if (match.index > lastIndex) {
         throw new Error(`Invalid notation: "${notation}"`);
       }
+
       lastIndex = pattern.lastIndex;
       hasValidComponent = true;
+
       if (match[3]) {
         // It's a dice expression (e.g., "3d6")
         const sign = match[1] === '-' ? -1 : 1;
         const count = match[2] ? parseInt(match[2]) : 1;
         const sides = parseInt(match[3]);
+
         if (count < 1) {
           throw new Error(`Invalid dice count: ${count}`);
         }
+
         if (sides < 2) {
           throw new Error(`Invalid dice sides: ${sides}`);
         }
+
         components.push({
           type: 'dice',
           count,
           sides,
           sign
         });
+
       } else if (match[4]) {
         // It's a modifier (e.g., "+5")
         const value = parseInt(match[4]);
@@ -85,6 +92,7 @@ export class DiceNotation {
       total: 0,
       details: []
     };
+
     for (const component of components) {
       if (component.type === 'dice') {
         const diceSet = new DiceSet(component.count, component.sides);
@@ -96,6 +104,7 @@ export class DiceNotation {
           subtotal: Math.abs(subtotal),
           sign: component.sign
         });
+
         results.total += subtotal;
         results.details.push({
           type: 'dice',
@@ -104,6 +113,7 @@ export class DiceNotation {
           rolls,
           subtotal
         });
+
       } else if (component.type === 'modifier') {
         results.modifiers.push(component.value);
         results.total += component.value;
@@ -115,6 +125,7 @@ export class DiceNotation {
     }
     return results;
   }
+
   /**
   * Calculates minimum possible result
   * @private
@@ -130,6 +141,7 @@ export class DiceNotation {
     }
     return min;
   }
+
   /**
   * Calculates maximum possible result
   * @private
@@ -145,6 +157,7 @@ export class DiceNotation {
     }
     return max;
   }
+  
   /**
   * Quick helper to roll dice notation and return just the total
   * @param {string} notation - Dice notation string
