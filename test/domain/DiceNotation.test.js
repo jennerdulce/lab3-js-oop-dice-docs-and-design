@@ -75,9 +75,66 @@ describe('DiceNotation', () => {
   it('should throw error for invalid dice counts', () => {
     assert.throws(() => DiceNotation.parse('0d6'), /Invalid dice count/);
   });
-  
+
   it('should throw error for invalid dice sides', () => {
     assert.throws(() => DiceNotation.parse('3d1'), /Invalid dice sides/);
     assert.throws(() => DiceNotation.parse('3d0'), /Invalid dice sides/);
   });
+
+
+  describe('roll functionality', () => {
+    it('should roll within expected range', () => {
+      const parsed = DiceNotation.parse('3d6');
+
+      for (let i = 0; i < 50; i++) {
+        const result = parsed.roll();
+        assert(result.total >= 3, 'Total should be at least 3');
+        assert(result.total <= 18, 'Total should be at most 18');
+      }
+    });
+
+    it('should include dice details in roll result', () => {
+      const parsed = DiceNotation.parse('2d6');
+      const result = parsed.roll();
+      assert.strictEqual(result.dice.length, 1);
+      assert.strictEqual(result.dice[0].notation, '2d6');
+      assert.strictEqual(result.dice[0].rolls.length, 2);
+      result.dice[0].rolls.forEach(roll => {
+        assert(roll >= 1 && roll <= 6);
+      });
+    });
+
+    it('should apply modifiers correctly', () => {
+      const parsed = DiceNotation.parse('1d6+5');
+
+      for (let i = 0; i < 20; i++) {
+        const result = parsed.roll();
+        assert(result.total >= 6, 'Total should be at least 6 (1+5)');
+        assert(result.total <= 11, 'Total should be at most 11 (6+5)');
+        assert.strictEqual(result.modifiers[0], 5);
+      }
+    });
+
+    it('should handle negative modifiers', () => {
+      const parsed = DiceNotation.parse('1d6-2');
+
+      for (let i = 0; i < 20; i++) {
+        const result = parsed.roll();
+        assert(result.total >= -1, 'Total should be at least -1 (1-2)');
+        assert(result.total <= 4, 'Total should be at most 4 (6-2)');
+      }
+    });
+
+    it('should combine multiple dice sets', () => {
+      const parsed = DiceNotation.parse('1d4+1d6');
+      
+      for (let i = 0; i < 20; i++) {
+        const result = parsed.roll();
+        assert(result.total >= 2, 'Total should be at least 2');
+        assert(result.total <= 10, 'Total should be at most 10');
+        assert.strictEqual(result.dice.length, 2);
+      }
+    });
+  });
+
 });
