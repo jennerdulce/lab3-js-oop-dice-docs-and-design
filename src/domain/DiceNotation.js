@@ -1,4 +1,4 @@
-mport { DiceSet } from './DiceSet.js';
+import { DiceSet } from './DiceSet.js';
 /**
 * Parses and evaluates dice notation strings (e.g., "3d6", "2d20+5", "1d8+2d6")
 */
@@ -157,7 +157,7 @@ export class DiceNotation {
     }
     return max;
   }
-  
+
   /**
   * Quick helper to roll dice notation and return just the total
   * @param {string} notation - Dice notation string
