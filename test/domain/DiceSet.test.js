@@ -101,4 +101,34 @@ describe('DiceSet', () => {
     });
   });
 
-})
+  describe('getMinTotal and getMaxTotal', () => {
+    it('should return correct min and max for d6', () => {
+      const set = new DiceSet(3, 6);
+      assert.strictEqual(set.getMinTotal(), 3); // 3 dice × 1
+      assert.strictEqual(set.getMaxTotal(), 18); // 3 dice × 6
+    });
+
+    it('should return correct min and max for d20', () => {
+      const set = new DiceSet(2, 20);
+      assert.strictEqual(set.getMinTotal(), 2); // 2 dice × 1
+      assert.strictEqual(set.getMaxTotal(), 40); // 2 dice × 20
+    });
+  });
+
+  describe('rolled values range', () => {
+    it('should always roll within min and max bounds', () => {
+      const set = new DiceSet(3, 8);
+      const min = set.getMinTotal();
+      const max = set.getMaxTotal();
+
+      for (let i = 0; i < 50; i++) {
+        set.rollAll();
+        const total = set.getTotal();
+        assert(total >= min, `Total ${total} should be >= ${min}`);
+        assert(total <= max, `Total ${total} should be <= ${max}`);
+      }
+    });
+  });
+
+
+});
