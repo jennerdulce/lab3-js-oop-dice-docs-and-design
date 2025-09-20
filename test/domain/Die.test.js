@@ -37,7 +37,7 @@ describe('Die', () => {
       const die = new Die();
       assert.strictEqual(die.getValue(), null);
       const rolled = die.roll();
-      assert.strictEqual(Die.getValue(), rolled);
+      assert.strictEqual(die.getValue(), rolled);
     })
 
     it('should generate different values (statistical test)', () => {
@@ -64,7 +64,7 @@ describe('Die', () => {
       assert.strictEqual(die.getValue(), value1);
 
       const value2 = die.roll();
-      assert.strictEqual(die.getValue, value2);
+      assert.strictEqual(die.getValue(), value2);
     })
   })
 
@@ -87,7 +87,7 @@ describe('Die', () => {
     die.roll();
     assert.strictEqual(die.hasBeenRolled(), true);
     assert(die.getValue() !== null);
-    
+
     die.reset();
     assert.strictEqual(die.hasBeenRolled(), false);
     assert.strictEqual(die.getValue(), null);
