@@ -20,3 +20,23 @@ describe('DiceSet', () => {
     });
   });
 });
+
+describe('rollAll', () => {
+  it('should return array of rolled values', () => {
+      const set = new DiceSet(3, 6);
+      const results = set.rollAll();
+      assert.strictEqual(results.length, 3);
+      results.forEach(value => {
+        assert(value >= 1, 'Value should be at least 1');
+        assert(value <= 6, 'Value should be at most 6');
+        assert(Number.isInteger(value), 'Value should be an integer');
+    });
+  });
+  
+  it('should update all die values', () => {
+    const set = new DiceSet(2, 6);
+    assert.deepStrictEqual(set.getValues(), [null, null]);
+    const results = set.rollAll();
+    assert.deepStrictEqual(set.getValues(), results);
+  });
+});
