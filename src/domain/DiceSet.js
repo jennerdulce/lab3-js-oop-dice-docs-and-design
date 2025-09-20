@@ -49,7 +49,7 @@ export class DiceSet {
     if(values.some(value => value === null)) {
       return null;
     }
-    return values.reduce((sum, value => sum + value, 0));
+    return values.reduce((sum, value) => sum + value, 0);
   }
 
   /**
