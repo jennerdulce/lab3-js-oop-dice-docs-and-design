@@ -162,4 +162,22 @@ describe('DiceNotation', () => {
       assert.strictEqual(parsed.getMax(), 23); // 12 + 8 + 3
     });
   });
+
+  describe('static roll method', () => {
+    it('should provide quick roll functionality', () => {
+      for (let i = 0; i < 20; i++) {
+        const total = DiceNotation.roll('2d6');
+        assert(total >= 2, 'Total should be at least 2');
+        assert(total <= 12, 'Total should be at most 12');
+        assert(Number.isInteger(total), 'Total should be an integer');
+      }
+    });
+    it('should work with modifiers', () => {
+      for (let i = 0; i < 20; i++) {
+        const total = DiceNotation.roll('1d4+2');
+        ssert(total >= 3, 'Total should be at least 3');
+        assert(total <= 6, 'Total should be at most 6');
+      }
+    });
+  });
 });
