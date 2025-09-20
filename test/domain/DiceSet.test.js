@@ -41,12 +41,12 @@ describe('DiceSet', () => {
   });
 
   describe('getValues', () => {
-  it('should return null values before rolling', () => {
-    const set = new DiceSet(3);
-    assert.deepStrictEqual(set.getValues(), [null, null, null]);
-  });
+    it('should return null values before rolling', () => {
+      const set = new DiceSet(3);
+      assert.deepStrictEqual(set.getValues(), [null, null, null]);
+    });
 
-  it('should return current values after rolling', () => {
+    it('should return current values after rolling', () => {
       const set = new DiceSet(2);
       const rolled = set.rollAll();
       assert.deepStrictEqual(set.getValues(), rolled);
@@ -54,25 +54,27 @@ describe('DiceSet', () => {
   });
 
   describe('getTotal', () => {
-  it('should return null if any die not rolled', () => {
-    const set = new DiceSet(3);
-    assert.strictEqual(set.getTotal(), null);
-  });
-  it('should return sum of all dice after rolling', () => {
-    const set = new DiceSet(3, 6);
-    const results = set.rollAll();
-    const expectedTotal = results.reduce((sum, val) => sum + val, 0);
-    assert.strictEqual(set.getTotal(), expectedTotal);
-  });
-
-  it('should calculate correct total for various rolls', () => {
-    const set = new DiceSet(2, 6);
-    // Test multiple times to ensure consistency
-    for (let i = 0; i < 10; i++) {
+    it('should return null if any die not rolled', () => {
+      const set = new DiceSet(3);
+      assert.strictEqual(set.getTotal(), null);
+    });
+    
+    it('should return sum of all dice after rolling', () => {
+      const set = new DiceSet(3, 6);
       const results = set.rollAll();
-      const expectedTotal = results[0] + results[1];
+      const expectedTotal = results.reduce((sum, val) => sum + val, 0);
       assert.strictEqual(set.getTotal(), expectedTotal);
-    }});
+    });
+
+    it('should calculate correct total for various rolls', () => {
+      const set = new DiceSet(2, 6);
+      // Test multiple times to ensure consistency
+      for (let i = 0; i < 10; i++) {
+        const results = set.rollAll();
+        const expectedTotal = results[0] + results[1];
+        assert.strictEqual(set.getTotal(), expectedTotal);
+      }
+    });
   });
 
   describe('hasBeenRolled', () => {
@@ -129,6 +131,5 @@ describe('DiceSet', () => {
       }
     });
   });
-
 
 });
