@@ -20,5 +20,36 @@ describe('Die', () => {
       assert.throws(() => new Die(-1))
     });
 
+    describe('roll', () => {
+      it('should return a value between 1 and sides', () => {
+        const die = new Die(6);
+        for(let i = 0; i < 100; i++) {
+          const value = die.roll();
+          assert(value >= 1, 'Value should be at least 1');
+          assert(value <= 6, 'Value should be at most 6');
+          assert(Number.isInteger(value), 'Value should be an integer');
+        }
+
+      })
+
+      it('should generate updated current value', () => {
+        const die = new Die();
+        assert.strictEqual(die.getValue(), null);
+        const rolled = die.roll();
+        assert.strictEqual(Die.getValue(), rolled);
+      })
+
+      it('should generate different values (statistical test)', () => {
+        const die = new Die(6);
+        const values = new Set();
+        // Roll many times to likely see all faces
+        for (let i = 0; i < 100; i++) {
+        values.add(die.roll());
+        }
+        // With 100 rolls of a d6, we should see multiple different values
+        assert(values.size > 1, 'Should generate different values');
+      });
+      
+    })
   })
 })
