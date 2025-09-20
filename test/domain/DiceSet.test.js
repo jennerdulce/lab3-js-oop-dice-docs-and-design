@@ -32,11 +32,26 @@ describe('rollAll', () => {
         assert(Number.isInteger(value), 'Value should be an integer');
     });
   });
-  
+
   it('should update all die values', () => {
     const set = new DiceSet(2, 6);
     assert.deepStrictEqual(set.getValues(), [null, null]);
     const results = set.rollAll();
     assert.deepStrictEqual(set.getValues(), results);
   });
+
+describe('getValues', () => {
+  it('should return null values before rolling', () => {
+    const set = new DiceSet(3);
+    assert.deepStrictEqual(set.getValues(), [null, null, null]);
+  });
+
+  it('should return current values after rolling', () => {
+      const set = new DiceSet(2);
+      const rolled = set.rollAll();
+      assert.deepStrictEqual(set.getValues(), rolled);
+    });
+  });
+
+  
 });
