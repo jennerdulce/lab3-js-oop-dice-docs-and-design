@@ -88,5 +88,17 @@ describe('DiceSet', () => {
     });
   });
 
+  describe('reset', () => {
+    it('should reset all dice to unrolled state', () => {
+      const set = new DiceSet(3);
+      set.rollAll();
+      assert.strictEqual(set.hasBeenRolled(), true);
+      assert(set.getTotal() !== null);
+      set.reset();
+      assert.strictEqual(set.hasBeenRolled(), false);
+      assert.strictEqual(set.getTotal(), null);
+      assert.deepStrictEqual(set.getValues(), [null, null, null]);
+    });
+  });
 
 })
