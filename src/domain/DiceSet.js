@@ -1,4 +1,4 @@
-import { Die } from './Die.js'
+import { Die } from './Die.js';
 /**
  * Represents a collection of dice that can be rolled together
  */
@@ -13,12 +13,12 @@ export class DiceSet {
    * @throws {Error} If count is less than 1
    */
   constructor(count = 1, sides = 6) {
-    if(count < 1) {
+    if (count < 1) {
       throw new Error('DiceSet must contain at least 1 die');
     }
 
     this.#dice = [];
-    for(let i = 0; i < count; i++) {
+    for (let i = 0; i < count; i++) {
       this.#dice.push(new Die(sides));
     }
   }
@@ -46,7 +46,7 @@ export class DiceSet {
    */
   getTotal() {
     const values = this.getValues();
-    if(values.some(value => value === null)) {
+    if (values.some(value => value === null)) {
       return null;
     }
     return values.reduce((sum, value) => sum + value, 0);

@@ -81,7 +81,6 @@ describe('DiceNotation', () => {
     assert.throws(() => DiceNotation.parse('3d0'), /Invalid dice sides/);
   });
 
-
   describe('roll functionality', () => {
     it('should roll within expected range', () => {
       const parsed = DiceNotation.parse('3d6');

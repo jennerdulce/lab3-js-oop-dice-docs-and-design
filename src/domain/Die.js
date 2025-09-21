@@ -1,6 +1,6 @@
 /**
-* Represents a single die with configurable number of sides
-*/
+ * Represents a single die with configurable number of sides
+ */
 export class Die {
   #sides;
   #currentValue;
@@ -11,7 +11,7 @@ export class Die {
    * @throws {Error} if sides is less than 2
    */
   constructor(sides = 6) {
-    if(sides < 2) {
+    if (sides < 2) {
       throw new Error('Die must have at least 2 sides');
     }
 

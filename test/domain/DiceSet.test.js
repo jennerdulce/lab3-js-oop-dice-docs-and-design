@@ -14,21 +14,27 @@ describe('DiceSet', () => {
       assert.strictEqual(set.getCount(), 3);
       assert.strictEqual(set.getSides(), 20);
     });
-      it('should throw error for count less than 1', () => {
-      assert.throws(() => new DiceSet(0), /DiceSet must contain at least 1 die/);
-      assert.throws(() => new DiceSet(-1), /DiceSet must contain at least 1 die/);
+    it('should throw error for count less than 1', () => {
+      assert.throws(
+        () => new DiceSet(0),
+        /DiceSet must contain at least 1 die/
+      );
+      assert.throws(
+        () => new DiceSet(-1),
+        /DiceSet must contain at least 1 die/
+      );
     });
   });
 
   describe('rollAll', () => {
     it('should return array of rolled values', () => {
-        const set = new DiceSet(3, 6);
-        const results = set.rollAll();
-        assert.strictEqual(results.length, 3);
-        results.forEach(value => {
-          assert(value >= 1, 'Value should be at least 1');
-          assert(value <= 6, 'Value should be at most 6');
-          assert(Number.isInteger(value), 'Value should be an integer');
+      const set = new DiceSet(3, 6);
+      const results = set.rollAll();
+      assert.strictEqual(results.length, 3);
+      results.forEach(value => {
+        assert(value >= 1, 'Value should be at least 1');
+        assert(value <= 6, 'Value should be at most 6');
+        assert(Number.isInteger(value), 'Value should be an integer');
       });
     });
 
@@ -58,7 +64,7 @@ describe('DiceSet', () => {
       const set = new DiceSet(3);
       assert.strictEqual(set.getTotal(), null);
     });
-    
+
     it('should return sum of all dice after rolling', () => {
       const set = new DiceSet(3, 6);
       const results = set.rollAll();
@@ -131,5 +137,4 @@ describe('DiceSet', () => {
       }
     });
   });
-
 });
