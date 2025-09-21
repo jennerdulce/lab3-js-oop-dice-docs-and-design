@@ -1,6 +1,6 @@
 {
   "name": "lab3-js-oop-dice-docs-and-design",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "305 lab 3 demo",
   "type": "module",
   "main": "index.js",
