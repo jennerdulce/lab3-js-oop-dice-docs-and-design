@@ -175,7 +175,7 @@ describe('DiceNotation', () => {
     it('should work with modifiers', () => {
       for (let i = 0; i < 20; i++) {
         const total = DiceNotation.roll('1d4+2');
-        ssert(total >= 3, 'Total should be at least 3');
+        assert(total >= 3, 'Total should be at least 3');
         assert(total <= 6, 'Total should be at most 6');
       }
     });
