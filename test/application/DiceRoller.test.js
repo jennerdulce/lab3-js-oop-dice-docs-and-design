@@ -75,5 +75,24 @@ const info = roller.getInfo('invalid');
 assert(info.startsWith('Error:'));
 });
 
-
+describe('history', () => {
+it('should track roll history', () => {
+const renderer = new TextRenderer();
+const roller = new DiceRoller(renderer);
+roller.roll('1d6');
+roller.roll('2d8');
+const history = roller.getHistory();
+assert.strictEqual(history.length, 2);
+assert.strictEqual(history[0].notation, '1d6');
+assert.strictEqual(history[1].notation, '2d8');
+});
+it('should clear history', () => {
+const renderer = new TextRenderer();
+const roller = new DiceRoller(renderer);
+roller.roll('1d6');
+assert.strictEqual(roller.getHistory().length, 1);
+roller.clearHistory();
+assert.strictEqual(roller.getHistory().length, 0);
+});
+});
 });
