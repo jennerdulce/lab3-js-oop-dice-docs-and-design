@@ -57,4 +57,23 @@ assert(result.includes('Error:'));
 });
 });
 
+describe('getInfo', () => {
+it('should provide notation information', () => {
+const renderer = new TextRenderer();
+const roller = new DiceRoller(renderer);
+const info = roller.getInfo('2d6+3');
+assert(info.includes('Notation: 2d6+3'));
+assert(info.includes('Minimum: 5'));
+assert(info.includes('Maximum: 15'));
+assert(info.includes('Average: 10.00'));
+});
+it('should handle invalid notation', () => {
+const renderer = new TextRenderer();
+const roller = new DiceRoller(renderer);
+const info = roller.getInfo('invalid');
+});
+assert(info.startsWith('Error:'));
+});
+
+
 });
