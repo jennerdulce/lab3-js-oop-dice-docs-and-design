@@ -22,3 +22,21 @@ const roller = new DiceRoller(renderer);
 assert(roller instanceof DiceRoller);
 });
 });
+
+describe('roll', () => {
+it('should roll dice and return rendered result', () => {
+const renderer = new TextRenderer();
+const roller = new DiceRoller(renderer);
+const result = roller.roll('3d6');
+assert(typeof result === 'string');
+assert(result.includes('Total:'));
+});
+it('should handle invalid notation', () => {
+const renderer = new TextRenderer();
+const roller = new DiceRoller(renderer);
+const result = roller.roll('invalid');
+assert(result.startsWith('Error:'));
+});
+});
+
+});
